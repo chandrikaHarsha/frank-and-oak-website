@@ -1,14 +1,29 @@
 "use client";
 // import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight, FaHeart, FaTag } from "react-icons/fa";
 import { SiGoogle } from "react-icons/si";
 import { BiLogoFacebook } from "react-icons/bi";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginForm = ({ close }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [signUp, setSignUp] = useState(false);
+  const [forgotPasswordBtn, setForgotPasswordBtn] = useState(false);
+  const Router = useRouter();
+
+  const handleIFForgotPassword = (e) => {
+    e.preventDefault();
+    Router.push("../account/login/recover");
+    close(false);
+  };
+  useEffect(() => {
+    if (window.location.pathname === "/account/login/recover") {
+      setForgotPasswordBtn(true);
+    } else {
+      setForgotPasswordBtn(false);
+    }
+  });
 
   return (
     <div className="w-[600px]  p-[30px] h-[650px] bg-white absolute top-[20px] left-[50%] translate-x-[-50%] overflow-y-scroll">
@@ -120,18 +135,21 @@ const LoginForm = ({ close }) => {
                 placeholder="Email Address"
                 className="p-[10px] focus:outline-none w-full border border-black text-[14px] my-[10px]"
               />
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Password"
-                className="p-[10px] focus:outline-none w-full border border-black text-[14px] my-[10px]"
-              />
-              <span
-                className="absolute top-[135px] font-[500] right-[30px] cursor-pointer text-[12px]"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
+              <div className="w-full my-[10px] relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                  className="p-[10px] focus:outline-none w-full border border-black text-[14px] "
+                />
+                <span
+                  className="absolute top-[12px] font-[500] right-[30px] cursor-pointer text-[12px]"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </span>
+              </div>
+
               <div className="flex gap-[20px] my-[15px] text-[12px]">
                 <label htmlFor="gender" className="mr-[20px]">
                   I shop for
@@ -185,23 +203,32 @@ const LoginForm = ({ close }) => {
               placeholder="Email Address"
               className="p-[10px] focus:outline-none w-full border border-black text-[14px]"
             />
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Password"
-              className="p-[10px] focus:outline-none w-full border border-black text-[14px]"
-            />
-            <span
-              className="absolute top-[85px] font-[500] right-[30px] cursor-pointer text-[12px]"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </span>
-            <Link href="./account/login/recover">
-              <span className="underline font-[500] text-[14px] cursor-pointer">
-                Forgot Password?
+
+            <div className="w-full my-[10px] relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                className="p-[10px] focus:outline-none w-full border border-black text-[14px] "
+              />
+              <span
+                className="absolute top-[12px] font-[500] right-[30px] cursor-pointer text-[12px]"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
               </span>
-            </Link>
+            </div>
+
+            <button
+              type="button"
+              className={`underline font-[500] text-[14px] w-[130px] ${
+                forgotPasswordBtn ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
+              disabled={forgotPasswordBtn}
+              onClick={(e) => handleIFForgotPassword(e)}
+            >
+              Forgot Password?
+            </button>
             <button className="w-full h-[40px] bg-black text-white">
               Log In
             </button>

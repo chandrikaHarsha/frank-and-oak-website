@@ -24,7 +24,9 @@ const Header = () => {
           <li className="text-[#ed2e00] cursor-pointer">The Stockroom Sale</li>
           <li className=" cursor-pointer">Women</li>
           <li className=" cursor-pointer">Men</li>
-          <li className=" cursor-pointer">Our Story</li>
+          <Link href="./../our-story">
+            <li className=" cursor-pointer">Our Story</li>
+          </Link>
         </ul>
       </div>
       <div>

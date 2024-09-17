@@ -13,7 +13,7 @@ const Testimonial = ({ Content, client, img }) => {
         </span>
       </div>
       <div className="object-contain">
-        <Image src={img} alt="testimonial" width={300} height={450} />
+        <Image src={img} alt="testimonial" width={300} height={300} />
       </div>
     </div>
   );

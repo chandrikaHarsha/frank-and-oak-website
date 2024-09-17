@@ -16,13 +16,14 @@ export default function Home() {
   const [showTestimonialBtn, setShowTestimonialBtn] = useState(false);
 
   const handleNext = () => {
-    const box = window.document.querySelector("#box");
+    const box = window.document.querySelector("#container");
     const width = box.clientWidth;
     box.scrollLeft += width;
+    console.log(box);
     setShowLatestBtn(true);
   };
   const handlePrev = () => {
-    const box = window.document.querySelector("#box");
+    const box = window.document.querySelector("#container");
     const width = box.clientWidth;
     box.scrollLeft -= width;
     if (box.scrollLeft === 0 || box.scrollLeft < width) setShowLatestBtn(false);
@@ -53,7 +54,7 @@ export default function Home() {
       </span> */}
       <Banner />
       <USP />
-      <div className="w-full h-[100vh] py-[30px] box-border">
+      <div className="w-full min-h-[100vh] py-[30px] box-border ">
         <h2 className="m-[30px] text-[30px]">Featured Categories</h2>
         <div className="w-full flex flex-row gap-[20px] items-center justify-evenly">
           <span className="flex flex-col">
@@ -95,12 +96,12 @@ export default function Home() {
           </span>
         </div>
       </div>
-      <div className="w-full h-[100vh] py-[30px] box-border relative">
+      <div className="w-full min-h-[100vh] py-[30px] box-border relative">
         <span className="m-[30px] text-[30px]">This Just In</span>
 
         <div
-          className="w-full h-[80vh] p-[0px_20px] my-[20px] box-border grid grid-flow-col gap-[20px] overflow-hidden scroll-smooth "
-          id="box"
+          className="w-full min-h-[80vh] p-[0px_20px] my-[20px] box-border grid grid-flow-col gap-[20px] overflow-hidden scroll-smooth "
+          id="container"
         >
           <FaArrowLeftLong
             className={`w-[40px] h-[40px] rounded-[50%] bg-white p-[10px] font-light absolute top-[50%] z-50 left-[25px] text-[#303640] shadow-lg cursor-pointer ${
@@ -124,13 +125,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full h-[100vh] py-[30px] box-border bg-[#f9f9f9] px-[20px] relative">
+      <div className="w-full min-h-[100vh] py-[30px] box-border bg-[#f9f9f9] px-[20px] relative">
         <span className="block my-[30px] text-center text-[30px]">
           You didn&apos;t hear it from us
         </span>
 
         <div
-          className="w-full h-[60vh] box-border bg-[#f9f9f9] px-[20px] overflow-hidden grid grid-flow-col gap-[50px] scroll-smooth"
+          className="w-full min-h-[60vh] box-border bg-[#f9f9f9] px-[20px] overflow-hidden grid grid-flow-col gap-[50px] scroll-smooth"
           id="testimonial"
         >
           <FaArrowLeftLong
@@ -196,7 +197,7 @@ export default function Home() {
           <span className="text-[30px] text-black underline">Who We Are</span>
         </div>
         <div className="w-full flex flex-col gap-[20px]">
-          <div className="w-full h-[50%] grid grid-cols-[2fr_2fr] gap-[30px]">
+          <div className="w-full min-h-[50%] grid grid-cols-[2fr_2fr] gap-[30px]">
             <div className="border relative">
               <div className=" img_container1"></div>
               <span className="absolute bottom-[15px] left-[15px] text-white text-[20px] font-semibold">
@@ -210,7 +211,7 @@ export default function Home() {
               </span>
             </div>
           </div>
-          <div className="w-full h-[50%] grid grid-cols-[2fr_2fr] gap-[30px]">
+          <div className="w-full min-h-[50%] grid grid-cols-[2fr_2fr] gap-[30px]">
             <div className="border relative">
               <div className=" img_container3"></div>
               <span className="absolute bottom-[15px] left-[15px] text-white text-[20px] font-semibold">
@@ -226,7 +227,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-[250px] bg-black flex flex-row text-white items-center justify-center gap-[150px]">
+      <div className="w-full min-h-[250px] bg-black flex flex-row text-white items-center justify-center gap-[150px]">
         <span className="flex flex-col items-center justify-center font-light text-[14px] gap-[10px]">
           <CiDeliveryTruck className="text-[50px]" />
           <span>Free Shipping over $99</span>
