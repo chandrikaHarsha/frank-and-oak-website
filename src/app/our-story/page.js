@@ -5,30 +5,34 @@ import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const page = () => {
-  const handleNextBtn = (slide) => {
+  const handleNextBtn = () => {
     const div = document.querySelector("#slider");
     let sliderBoxWidth = div.clientWidth;
-    if (slide) {  
-      div.scrollLeft += sliderBoxWidth * slide;
-    }
+
     div.scrollLeft += sliderBoxWidth;
   };
-  const handlePrevBtn = (slide) => {
+  const handlePrevBtn = () => {
     const div = document.querySelector("#slider");
     let sliderBoxWidth = div.clientWidth;
-    if (slide) {
-      div.scrollLeft -= sliderBoxWidth * slide;
-    }
+
     div.scrollLeft -= sliderBoxWidth;
   };
 
   const controllers = () => {
     let controller = document.querySelector("#controller").childNodes;
+    const div = document.querySelector("#slider");
+    let sliderBoxWidth = div.clientWidth;
+
     controller.forEach((v) => {
       v.addEventListener("click", () => {
         let id = v.dataset.id;
-        handlePrevBtn(id);
-        handleNextBtn(id);
+        if (id === controller.length - 1) {
+          div.scrollLeft = div.scrollWidth - sliderBoxWidth;
+        } else {
+          const offset = id * sliderBoxWidth;
+          div.scrollLeft = offset;
+        }
+        // console.log("Controller Btn: ", div.clientWidth);
       });
     });
   };
@@ -327,10 +331,10 @@ const page = () => {
       </div>
 
       <div
-        className="w-full min-h-[60vh] grid grid-cols-[2fr_2fr] my-[50px] gap-[30px] px-[30px] "
+        className="w-full min-h-[60vh] grid grid-cols-[2fr_2fr] my-[50px] gap-[20px] px-[30px] box-border"
         id="community"
       >
-        <div className="w-full flex flex-col justify-center text-balance p-[10px] box-border">
+        <div className="w-full flex flex-col justify-center text-balance p-[10px] box-border ">
           <h1 className="text-[50px] font-[500] my-[10px] ">Our community</h1>
           <span className="my-[10px] font-[500] text-[20px]">
             Mighty oaks from little acorns grow
@@ -344,7 +348,7 @@ const page = () => {
             our achievements:
           </p>
         </div>
-        <div className="w-full relative box-border">
+        <div className="w-full relative box-border flex items-center justify-center">
           <FaArrowLeft
             className="w-[30px] h-[30px] rounded-[50%] bg-[rgba(0,0,0,0.5)] text-white absolute top-[50%] left-[25px] text-[18px] font-light p-[5px] cursor-pointer z-30"
             onClick={handlePrevBtn}
@@ -354,7 +358,7 @@ const page = () => {
             onClick={handleNextBtn}
           />
           <div
-            className="absolute bottom-[10px] left-[50%] grid grid-flow-col gap-[20px] z-40"
+            className="absolute bottom-[10%] left-[50%] grid grid-flow-col gap-[20px] z-40"
             id="controller"
             onClick={controllers}
           >
@@ -372,10 +376,10 @@ const page = () => {
             ></span>
           </div>
           <div
-            className="w-[630px] min-h-[60vh] grid grid-flow-col overflow-hidden scroll-smooth box-border"
+            className="w-[450px] min-h-[60vh] grid grid-flow-col overflow-hidden scroll-smooth box-border"
             id="slider"
           >
-            <div className="w-[630px] object-contain relative">
+            <div className="w-[450px] object-contain relative">
               <Image
                 src="/communitySectionImg1.webp"
                 alt="office"
@@ -395,7 +399,7 @@ const page = () => {
                 </span>
               </div>
             </div>
-            <div className="w-[630px] object-contain relative">
+            <div className="w-[450px] object-contain relative">
               <Image
                 src="/communitySectionImg2.webp"
                 alt="office"
@@ -411,14 +415,13 @@ const page = () => {
                   We teamed up with Town Brewery and created over 5,000 cans of
                   IPA beer called Coastal Waters.
                   <br />
-                  <br />
                   For every can sold, $1 is donated to the David Suzuki
                   Foundation, which aims to protect Canada’s oceans, and marine
                   life biodiversity.
                 </span>
               </div>
             </div>
-            <div className="w-[630px] object-contain relative">
+            <div className="w-[450px] object-contain relative">
               <Image
                 src="/communitySectionImg3.webp"
                 alt="office"

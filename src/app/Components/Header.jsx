@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { BsHeart } from "react-icons/bs";
 import { VscAccount } from "react-icons/vsc";
@@ -7,9 +7,38 @@ import { IoBagOutline } from "react-icons/io5";
 import LoginForm from "./LoginForm";
 import Link from "next/link";
 import Offcanvas from "./Offcanvas";
+import Cookies from "js-cookie";
+import { usePathname, useRouter } from "next/navigation";
 const Header = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const [ifCookie, setIfCookie] = useState(false);
+
+  const router = useRouter();
+  let pathName = usePathname();
+
+  useEffect(() => {
+    const cookie = Cookies.get("token");
+    if (!cookie) {
+      // alert("no cookies");
+      setShowLogin(true);
+      setIfCookie(false);
+      router.push("/");
+    } else {
+      // alert(pathName);
+      const  account= document.querySelector("#account");
+      account.addEventListener('click',()=>{
+        console.log("From header pathname changed route.")
+        setShowLogin(false);
+        setIfCookie(true);
+        pathName !== "/account/account-settings"
+          ? router.push("./../account/account-settings")
+          : "#";
+      })
+      
+    }
+  }, []);
+
   return (
     <header className="w-full h-[50px] border-b grid grid-cols-[10%_70%_20%] p-[0_30px] justify-between fixed top-0 z-50 bg-white">
       <div>
@@ -24,18 +53,23 @@ const Header = () => {
           <li className="text-[#ed2e00] cursor-pointer">The Stockroom Sale</li>
           <li className=" cursor-pointer">Women</li>
           <li className=" cursor-pointer">Men</li>
-          <Link href="./../our-story">
+          <Link href="/our-story">
             <li className=" cursor-pointer">Our Story</li>
           </Link>
         </ul>
       </div>
       <div>
-        <ul className="list-none w-full flex h-full items-center justify-end gap-[25px]  px-[20px]">
+        <ul className="list-none w-full flex h-full items-center justify-end gap-[25px] px-[20px]">
           <li className="cursor-pointer text-[20px]">
             <GoSearch />
           </li>
-          <li className="cursor-pointer text-[20px]">
-            <VscAccount onClick={() => setShowLogin(true)} />
+          <li className="cursor-pointer text-[20px] relative">
+            <VscAccount
+              onClick={() => {
+                ifCookie ? setShowLogin(false) : setShowLogin(true);
+              }}
+              id="account"
+            />
           </li>
           <li className="cursor-pointer text-[20px]">
             <BsHeart />
