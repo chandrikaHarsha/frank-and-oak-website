@@ -5,8 +5,17 @@ import Footer from "../Components/Footer";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 export default function RootLayout({ children }) {
   const checkPath = usePathname();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted) {
+    return null;
+  }
   // console.log(checkPath);
   return (
     <html>
@@ -54,7 +63,7 @@ export default function RootLayout({ children }) {
                 <li
                   className="cursor-pointer hover:font-[600] text-[16px]"
                   onClick={() => {
-                    const cookie = Cookies.remove("token");
+                    Cookies.remove("token");
                   }}
                 >
                   Log out

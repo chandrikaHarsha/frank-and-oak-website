@@ -43,4 +43,24 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.productSideNav {
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.productSideNav::-webkit-scrollbar {
+  width: 10px;
+}
+.productSideNav::-webkit-scrollbar-track {
+  background-color: transparent;
+  background-clip: content-box;
+}
+.productSideNav::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #bbbbbbc3;
+}
+.productSideNav::-webkit-scrollbar-thumb:hover {
+  background-color: #5555555e;
+}
 @tailwind utilities;

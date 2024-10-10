@@ -26,16 +26,15 @@ const Header = () => {
       router.push("/");
     } else {
       // alert(pathName);
-      const  account= document.querySelector("#account");
-      account.addEventListener('click',()=>{
-        console.log("From header pathname changed route.")
+      const account = document.querySelector("#account");
+      account.addEventListener("click", () => {
+        console.log("From header pathname, route changed.");
         setShowLogin(false);
         setIfCookie(true);
         pathName !== "/account/account-settings"
           ? router.push("./../account/account-settings")
           : "#";
-      })
-      
+      });
     }
   }, []);
 
@@ -50,9 +49,11 @@ const Header = () => {
       </div>
       <div>
         <ul className="list-none w-full flex h-full items-center gap-[25px] px-[25px] ">
-          <li className="text-[#ed2e00] cursor-pointer">The Stockroom Sale</li>
-          <li className=" cursor-pointer">Women</li>
-          <li className=" cursor-pointer">Men</li>
+          <Link href="/shop-now/">
+            <li className="text-[#ed2e00] cursor-pointer">Shop now</li>
+          </Link>
+          {/* <li className=" cursor-pointer">Women</li> */}
+          {/* <li className=" cursor-pointer">Men</li> */}
           <Link href="/our-story">
             <li className=" cursor-pointer">Our Story</li>
           </Link>
